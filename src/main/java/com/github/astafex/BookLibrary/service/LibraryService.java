@@ -36,13 +36,14 @@ public class LibraryService {
         personDAO.remove(id);
     }
 
+    public List<Book> getPersonBooksByID(int id) {
+        return personDAO.getBooksByID(id);
+    }
+
     public List<Book> getAllBooks() {
         return bookDAO.getAll();
     }
 
-    public List<Book> getPersonBooksByID(int id) {
-        return personDAO.getBooksByID(id);
-    }
 
     public Book getBook(int id) {
         return bookDAO.show(id);
