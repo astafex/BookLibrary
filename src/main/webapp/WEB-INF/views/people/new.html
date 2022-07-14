@@ -7,22 +7,22 @@
 <body>
 <form th:method="POST" th:action="@{/people}" th:object="${person}">
     <div>
-        <label for="fullName">Full name:</label>
+        <label for="fullName">ФИО</label>
         <input type="text" th:field="*{fullName}" id="fullName">
         <p style="color:red" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}">error</p>
         <br>
 
-        <label for="yearOfBirth">Year of birth:</label>
+        <label for="yearOfBirth">Год рождения</label>
         <input type="text" th:field="*{yearOfBirth}" id="yearOfBirth">
         <p style="color:red" th:if="${#fields.hasErrors('yearOfBirth')}" th:errors="*{yearOfBirth}">error</p>
         <br>
-        <input type="submit" value="Add">
+        <input type="submit" value="Добавить">
     </div>
 </form>
 <br>
 <hr>
 <form th:method="GET" th:action="@{/people}">
-    <input type="submit" value="Back">
+    <input type="submit" value="Все пользователи">
 </form>
 </body>
 </html>

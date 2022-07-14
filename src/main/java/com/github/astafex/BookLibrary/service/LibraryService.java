@@ -63,4 +63,12 @@ public class LibraryService {
     public Optional<Person> getBookHolder(int id) {
         return bookDAO.getBookHolder(id);
     }
+
+    public void returnBookToLibrary(int id) {
+        bookDAO.clearHolderBook(id);
+    }
+
+    public void takeBookFromLibrary(int id, int personID) {
+        bookDAO.addHolderBook(id, personID);
+    }
 }

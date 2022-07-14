@@ -8,46 +8,49 @@
 <table>
     <tbody>
     <tr>
-        <td th:width="100"> ID: </td>
+        <td th:width="100"> ID:</td>
         <td><span th:text="${person.getId()}"> </span></td>
     </tr>
     <tr>
-        <td> Full name: </td>
+        <td>ФИО</td>
         <td><span th:text="${person.getFullName()}"> </span></td>
     </tr>
     <tr>
-        <td> Year of birth: </td>
+        <td>Год рождения</td>
         <td><span th:text="${person.getYearOfBirth()}"></span><br></td>
     </tr>
     </tbody>
 </table>
 <br>
+
+
 <table>
-    <thead>
-    <tr>
-        <th>Книги у клиента:</th>
-    </tr>
-    </thead>
     <tbody>
     <tr th:if="${books.isEmpty()}">
-        <td colspan="2"> Человек пока не взял ни одной книги </td>
+        <td colspan="2">Человек пока не взял ни одной книги</td>
+    </tr>
+    <tr th:if="${!books.isEmpty()}">
+        <td>Книги на руках:</td>
     </tr>
     <tr th:each="book : ${books}">
-        <td><a th:text="${book.getTitle()}" th:href="@{/books/{id}(id=${book.getId()})}"> Title </a></td>
+        <td><a th:text="${book.getTitle()}" th:href="@{/books/{id}(id=${book.getId()})}">Title</a></td>
     </tr>
     </tbody>
 </table>
 
+
 <form th:method="GET" th:action="@{/people/{id}/edit(id=${person.getId()})}">
-    <input type="submit" value="Edit">
+    <input type="submit" value="Редактировать">
 </form>
 <form th:method="DELETE" th:action="@{/people/{id}(id=${person.getId()})}">
-    <input type="submit" value="Delete">
+    <input type="submit" value="Удалить">
 </form>
 <br>
 <hr>
+
+
 <form th:method="GET" th:action="@{/people}">
-    <input type="submit" value="Back">
+    <input type="submit" value="Все пользователи">
 </form>
 </body>
 </html>

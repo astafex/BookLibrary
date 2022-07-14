@@ -42,4 +42,12 @@ public class BookDAO {
     public Optional<Person> getBookHolder(int id) {
         return jdbcTemplate.query("SELECT p.* FROM book b INNER JOIN person p ON p.ID=b.person_id WHERE b.id=?", new BeanPropertyRowMapper<>(Person.class), id).stream().findAny();
     }
+
+    public void clearHolderBook(int id) {
+        jdbcTemplate.update("UPDATE book SET person_id=null WHERE id=?", id);
+    }
+
+    public void addHolderBook(int id, int personID) {
+        jdbcTemplate.update("UPDATE book SET person_id=? WHERE id=?", personID, id);
+    }
 }

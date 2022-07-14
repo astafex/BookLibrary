@@ -1,6 +1,7 @@
 package com.github.astafex.BookLibrary.controller;
 
 import com.github.astafex.BookLibrary.model.Book;
+import com.github.astafex.BookLibrary.model.Person;
 import com.github.astafex.BookLibrary.service.LibraryService;
 import com.github.astafex.BookLibrary.util.BookValidator;
 import lombok.RequiredArgsConstructor;
@@ -26,9 +27,11 @@ public class BookController {
     }
 
     @GetMapping("/{id}")
-    public String showBook(@PathVariable int id, Model model) {
+    public String showBook(@PathVariable int id, Model model,
+                           @ModelAttribute("person") Person person) {
         model.addAttribute("book", service.getBook(id));
-        model.addAttribute("person", service.getBookHolder(id));
+        model.addAttribute("personHolder", service.getBookHolder(id));
+        model.addAttribute("people", service.getAllPeople());
         return "/books/show";
     }
 
@@ -68,6 +71,19 @@ public class BookController {
         }
         service.updateBook(id, updateBook);
         return "redirect:/books";
+    }
+
+    @PatchMapping("/{id}/return")
+    public String returnBook(@PathVariable int id) {
+        service.returnBookToLibrary(id);
+        return "redirect:/books/{id}";
+    }
+
+    @PatchMapping("/{id}/take")
+    public String takeBook(@PathVariable int id,
+                           @ModelAttribute("person") Person person) {
+        service.takeBookFromLibrary(id, person.getId());
+        return "redirect:/books/{id}";
     }
 
     @DeleteMapping("/{id}")

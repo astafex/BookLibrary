@@ -8,24 +8,24 @@
 <table>
     <thead>
     <tr>
-        <th>Full name</th>
-        <th>Year of birth</th>
+        <th>ФИО</th>
+        <th>Год рождения</th>
     </tr>
     </thead>
     <tbody>
     <tr th:if="${people.isEmpty()}">
-        <td colspan="2"> No People Available</td>
+        <td colspan="2">Нет клиентов</td>
     </tr>
     <tr th:each="person : ${people}">
-        <td><a th:text="${person.getFullName()}" th:href="@{/people/{id}(id=${person.getId()})}"> Full name </a></td>
-        <td><a th:text="${person.getYearOfBirth()}"> Year of birth </a></td>
+        <td><a th:text="${person.getFullName()}" th:href="@{/people/{id}(id=${person.getId()})}">Full name</a></td>
+        <td><a th:text="${person.getYearOfBirth()}">Year of birth</a></td>
     </tr>
     </tbody>
 </table>
 <br>
 <hr>
 <form th:method="GET" th:action="@{/people/add}">
-    <input type="submit" value="New">
+    <input type="submit" value="Новый пользователь">
 </form>
 </body>
 </html>
