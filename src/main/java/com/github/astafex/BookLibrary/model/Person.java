@@ -3,10 +3,7 @@ package com.github.astafex.BookLibrary.model;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 @Data
 @NoArgsConstructor
@@ -14,6 +11,7 @@ public class Person {
     private int id;
 
     @Size(max = 100)
+    @NotEmpty
     @Pattern(regexp = "^([A-ZА-Я][a-zа-я]+) ([A-ZА-Я][a-zа-я]+) ([A-ZА-Я][a-zа-я]+)$")
     private String fullName;
 

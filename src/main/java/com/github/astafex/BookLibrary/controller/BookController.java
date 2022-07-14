@@ -3,7 +3,6 @@ package com.github.astafex.BookLibrary.controller;
 import com.github.astafex.BookLibrary.model.Book;
 import com.github.astafex.BookLibrary.model.Person;
 import com.github.astafex.BookLibrary.service.LibraryService;
-import com.github.astafex.BookLibrary.util.BookValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,14 +10,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Objects;
 
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/books")
 public class BookController {
     private final LibraryService service;
-    private final BookValidator bookValidator;
 
     @GetMapping
     public String showAllBooks(Model model) {
@@ -43,7 +40,6 @@ public class BookController {
     @PostMapping
     public String createPerson(@ModelAttribute("book") @Valid Book book,
                                BindingResult bindingResult) {
-        bookValidator.validate(book, bindingResult);
         if (bindingResult.hasErrors()) {
             return "/books/new";
         }
@@ -63,9 +59,6 @@ public class BookController {
                              @ModelAttribute("book") @Valid Book updateBook,
                              BindingResult bindingResult) {
         Book beforeBook = service.getBook(id);
-        if (!Objects.equals(beforeBook.getTitle(), updateBook.getTitle())) {
-            bookValidator.validate(updateBook, bindingResult);
-        }
         if (bindingResult.hasErrors()) {
             return "/books/edit";
         }
