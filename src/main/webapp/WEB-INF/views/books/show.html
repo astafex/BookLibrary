@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Show</title>
+</head>
+<body>
+<table>
+    <tbody>
+    <tr>
+        <td th:width="100"> ID: </td>
+        <td><span th:text="${book.getId()}"></span></td>
+    </tr>
+    <tr>
+        <td> Title: </td>
+        <td><span th:text="${book.getTitle()}"></span></td>
+    </tr>
+    <tr>
+        <td> Author: </td>
+        <td><span th:text="${book.getAuthor()}"></span></td>
+    </tr>
+    <tr>
+        <td> Year: </td>
+        <td><span th:text="${book.getYearOfPublish()}"></span></td>
+    </tr>
+    </tbody>
+</table>
+<form th:method="GET" th:action="@{/books/{id}/edit(id=${book.getId()})}">
+    <input type="submit" value="Edit">
+</form>
+<form th:method="DELETE" th:action="@{/books/{id}(id=${book.getId()})}">
+    <input type="submit" value="Delete">
+</form>
+<br>
+<hr>
+<form th:method="GET" th:action="@{/books}">
+    <input type="submit" value="Back">
+</form>
+</body>
+</html>

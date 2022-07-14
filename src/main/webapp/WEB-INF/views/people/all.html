@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>Full name</th>
+        <th>Year of birth</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${people.isEmpty()}">
+        <td colspan="2"> No People Available</td>
+    </tr>
+    <tr th:each="person : ${people}">
+        <td><a th:text="${person.getFullName()}" th:href="@{/people/{id}(id=${person.getId()})}"> Full name </a></td>
+        <td><a th:text="${person.getYearOfBirth()}"> Year of birth </a></td>
+    </tr>
+    </tbody>
+</table>
+<br>
+<hr>
+<form th:method="GET" th:action="@{/people/add}">
+    <input type="submit" value="New">
+</form>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Year</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${books.isEmpty()}">
+        <td colspan="2"> No Books Available</td>
+    </tr>
+    <tr th:each="book : ${books}">
+        <td><a th:text="${book.getId()}"> ID </a></td>
+        <td><a th:text="${book.getTitle()}" th:href="@{/books/{id}(id=${book.getId()})}"> Title </a></td>
+        <td><a th:text="${book.getAuthor()}"> Author </a></td>
+        <td><a th:text="${book.getYearOfPublish()}"> Year </a></td>
+    </tr>
+    </tbody>
+</table>
+<br>
+<hr>
+<form th:method="GET" th:action="@{/books/add}">
+    <input type="submit" value="New">
+</form>
+</body>
+</html>
